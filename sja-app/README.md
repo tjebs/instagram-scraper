@@ -44,6 +44,34 @@ Data havner i `sja-app/data/` (gitignored):
   «Kontakt avdelingsleder før arbeidet starter» — innsendingen registreres
   likevel, og markeres rødt i admin.
 
+## Legg til på Hjem-skjermen (PWA)
+
+Appen har web app-manifest og ikoner, så ansatte kan lagre den som en app på
+mobilen: **Safari → Del → Legg til på Hjem-skjerm** (iPhone) eller
+**Chrome → Installer app** (Android). Den åpner da i fullskjerm uten
+nettleser-UI. (Offline-støtte/service worker er ikke med i PoC-en.)
+
+## Hosting og seniorene.no/risikovurdering
+
+Seniorene.no ligger på HubSpot, som ikke kan kjøre Node-apper eller databaser.
+Anbefalt oppsett:
+
+1. Host appen på et eget subdomene, f.eks. `sja.seniorene.no`
+   (DNS CNAME → hosting-leverandøren).
+2. Lag en URL-redirect i HubSpot (Settings → Website → Domains & URLs →
+   URL Redirects): `seniorene.no/risikovurdering` → `https://sja.seniorene.no`.
+
+Hosting-alternativer:
+
+- **Railway / Fly.io / Render med persistent volum** (~5 USD/mnd): appen
+  kjører som den er, med SQLite og bilder på volumet. Enklest.
+- **Vercel + Supabase**: Vercel har ikke vedvarende disk, så da byttes
+  SQLite til Supabase Postgres (skriv om `src/lib/repository.ts` + `db.ts`)
+  og bildene til Supabase Storage.
+
+Husk at appen må serveres over HTTPS for at GPS og kamera skal fungere fra
+mobil — alle leverandørene over gir det automatisk.
+
 ## Google Sheets-integrasjon
 
 PoC-en skriver hver innsending til `data/sheet-sync.csv` med nøyaktig de

@@ -5,11 +5,20 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Seniorene – Sikker Jobb Analyse",
   description: "Risikovurdering (SJA) for oppdrag – Seniorene.no",
+  // iOS bruker ikke manifestet fullt ut — disse gir riktig ikon og
+  // fullskjermvisning når appen legges på Hjem-skjermen i Safari.
+  icons: { apple: "/icon-192.png" },
+  appleWebApp: {
+    capable: true,
+    title: "SJA",
+    statusBarStyle: "default",
+  },
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  themeColor: "#1d6b46",
 };
 
 export default function RootLayout({
