@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand: #1d6b46;
+  --color-brand-dark: #155034;
+  --color-brand-light: #e7f2ec;
+  --color-varsel: #b91c1c;
+  --color-varsel-light: #fef2f2;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+html {
+  background-color: #f4f5f3;
+}
+
+body {
+  /* Minst 16px basisfont så iOS ikke zoomer inn på inputfelt */
+  font-size: 16px;
+  color: #1f2937;
+}
